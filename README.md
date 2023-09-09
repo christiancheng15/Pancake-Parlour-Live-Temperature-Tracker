@@ -1,2 +1,2 @@
-# Panckake Parlour Live Temperature Tracker [@tpptracker](https://twitter.com/tpptracker)
+# Panckake Parlour Winter Parlour Tracker
 ### Automated real-time temperature monitoring from the Bureau of Meteorology
