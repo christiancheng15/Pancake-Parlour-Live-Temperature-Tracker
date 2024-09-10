@@ -1,7 +1,6 @@
 import requests
 from fake_useragent import UserAgent
 import time
-import hashlib
 
 def get_weather_data():
     headers = {
@@ -33,15 +32,11 @@ def get_weather_data():
 
     return None
 
-def hash_data(data):
-    data_string = repr(data)
-    return hashlib.sha256(data_string.encode('utf-8')).hexdigest()
-
 if __name__ == "__main__":
 
     ua = UserAgent()
     delay = 60
-    last_hash = None
+    last_temperature = None
 
     print(f"Bureau of Meteorology Monitor | Delay: {delay}")
 
@@ -52,16 +47,14 @@ if __name__ == "__main__":
             print("Failed to retrieve or process weather data.")
             continue
 
-        hashed_latest_weather_data = hash_data(latest_weather_data)
-
-        if hashed_latest_weather_data == last_hash:
-            print("No changes found.")
+        if latest_weather_data["air_temp"] == last_temperature:
+            print("No changes in temperature found.")
             continue
 
         print(latest_weather_data)
 
         # Add social media integration
 
-        last_hash = hashed_latest_weather_data
+        last_temperature = latest_weather_data["air_temp"]
 
         time.sleep(delay)
