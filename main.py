@@ -1,6 +1,7 @@
 import requests
 from fake_useragent import UserAgent
 import time
+import configparser
 
 def get_weather_data():
     headers = {
@@ -34,8 +35,11 @@ def get_weather_data():
 
 if __name__ == "__main__":
 
+    config = configparser.ConfigParser()
+    config.read("config.ini")
+
     ua = UserAgent()
-    delay = 60
+    delay = int(config["Monitor"]["Delay"])
     last_temperature = None
 
     print(f"Bureau of Meteorology Monitor | Delay: {delay}")
